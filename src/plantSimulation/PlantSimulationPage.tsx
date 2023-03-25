@@ -10,6 +10,7 @@ const PlantSimulationPage = () => {
                 <Button onClick={App}>Back</Button>
             </CardHeader>
             <Card.Body>
+                {/* add the MainScene.js here */}
 
             </Card.Body>
             
