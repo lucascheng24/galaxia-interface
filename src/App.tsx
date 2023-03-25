@@ -12,27 +12,45 @@ import Home from './homePage/Home';
 
 const App = () => {
 
-  const PLANT_SIMULATION_URL = '/Plant_Simulation'
-  const LOGIN_INTERFACE_URL = '/Login_Interface'
 
 
   return (
-   <div>
-    <Card.Header>Welcome to home page</Card.Header>
-    <Card.Body>
-      <Link to={'/Plant_Simulation'}>
-        <Button>Plant Simulation</Button>
-      </Link>
-      <Link to={'/Login_Interface'}>
-        <Button>Plant Simulation</Button>
-      </Link>
-    </Card.Body>
+    <div className="App">
+      <header className="App-header">
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
 
-    <Routes>
-      <Route path={'/Plant_Simulation'} element={<PlantSimulationPage/>} />
-      <Route path={'/Login_Interface'} element={<LoginInterface/>} />
-    </Routes>
-   </div>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="blogs" element={<PlantSimulationPage/>} />
+              {/* <Route path="contact" element={} />
+              <Route path="*" element={} /> */}
+            </Route>
+          </Routes>
+        </BrowserRouter>
+        <p>
+          Edit <code>src/App.tsx</code> and save to reload.
+        </p>
+        {/* <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a> */}
+      </header>
+      <Card>
+        <Card.Header>
+          <Button onClick={() => <PlantSimulationPage/>}>Plant Simulation</Button>
+        </Card.Header>
+        <Card.Body>
+          <LoginInterface/> 
+          
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 
