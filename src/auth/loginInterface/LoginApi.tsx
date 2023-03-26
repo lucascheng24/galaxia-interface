@@ -1,6 +1,30 @@
+import axios from "axios";
+import { common_request } from "../../commonLibrary/httpStandard";
 
-const login_validation = () => {
+const baseUrl = common_request.serverBaseUrl
+
+const login_request = (username: string, hashedPw: string) => {
     //  api of something
+
+    var apiPath = baseUrl + '/login'
+
+    axios.get(apiPath, {
+        params: {
+            context: 'ascsac',
+            username: username,
+            password: hashedPw
+        },
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            'token': 'xxx'
+        }
+
+    }).then(response => {
+        console.log(response.data)
+
+    }).catch(error => {
+
+    })
 }
 
 
@@ -41,4 +65,4 @@ const request = (input: any) => {
 }
 
 
-export default login_validation;
+export default login_request;
