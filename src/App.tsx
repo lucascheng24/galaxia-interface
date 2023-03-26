@@ -1,10 +1,10 @@
 import React from 'react';
 // import logo from './';
 import './App.css';
-import './auth/LoginInterface'
+import './auth/loginInterface/LoginInterface'
 import { Button, Card } from 'react-bootstrap';
 import { BrowserRouter, Link, Route, Routes, useNavigate } from 'react-router-dom'
-import LoginInterface from './auth/LoginInterface';
+import LoginInterface from './auth/loginInterface/LoginInterface';
 import PlanetSimulationPage from './plantSimulation/PlanetSimulationPage'
 import Layout from './Layout';
 import Home from './homePage/Home';
