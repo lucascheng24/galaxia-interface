@@ -60,6 +60,10 @@ const LoginInterface = (props: any) => {
       <Grid item xs={8} className='common-border-01'>
         <div>xs=8</div>
       </Grid>
+
+      <Grid item xs={4} className='common-border-01'>
+        <div>Register</div>
+      </Grid>
     </Grid>
     // <Container>
     //   <Row>

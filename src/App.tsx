@@ -22,6 +22,7 @@ const App = () => {
     fontSize:'50px',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
+    color: '#FFFFFF'
   };
 
   const navigate = useNavigate();
