@@ -64,3 +64,7 @@
 .common-cursor-pointer {
     cursor: pointer;
 }
+
+.common-border-01 {
+    border: 1px solid #FFFFFF;
+}
