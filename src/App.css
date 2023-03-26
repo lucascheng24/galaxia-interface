@@ -44,6 +44,14 @@
     font-family: 'Trade Gothic Inline';
 }
 
+.common-PlainText {
+    color: white;
+    text-align: -webkit-left;
+    padding-left: 2rem;
+    font-size: x-large;
+    font-family: 'Trade Gothic Inline';
+}
+
 .login-button {
     background: transparent;
     color: #FFFFFF;
@@ -51,4 +59,8 @@
     font-size: medium;
     position: absolute;
     left: 4.5rem;
+}
+
+.common-cursor-pointer {
+    cursor: pointer;
 }

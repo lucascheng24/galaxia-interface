@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 import './auth/LoginInterface'
 import { Button, Card } from 'react-bootstrap';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Link, Route, Routes, useNavigate } from 'react-router-dom'
 import LoginInterface from './auth/LoginInterface';
 import PlantSimulationPage from './plantSimulation/PlantSimulationPage'
 import Layout from './Layout';
@@ -24,13 +24,21 @@ const App = () => {
     backgroundRepeat: 'no-repeat',
   };
 
+  const navigate = useNavigate();
+  
+
   return (
     <div className="App" style={myStyle_backgroundImage}>
-      <Card>
-        <Card.Title className='App-Title'>GALAXIA</Card.Title>
-        <Card.Title className='App-Title'>CONNECT</Card.Title>
-        <Button className='login-button'>Click here to login</Button>
-      </Card>
+      
+
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/LoginInterface" element={<LoginInterface />} />
+        {/* <Route path="/test" element={<Test />}></Route> */}
+        {/* <Route index element={<div className='App-Title'>這是首頁</div>}></Route> */}
+        {/* <Route path="*" element={<NotFound />}></Route> */}
+      </Routes>
+      
 
       {/* <Card.Text>GALAXIA</Card.Text>
       <Card.Text>CONNECT</Card.Text> */}
@@ -39,7 +47,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="blogs" element={<PlantSimulationPage/>} />
+              <Route path="/blogs" element={<PlantSimulationPage/>} />
+              <Route path="/LoginInterface" element={<LoginInterface/>} />
             </Route>
           </Routes>
         </BrowserRouter> */}
