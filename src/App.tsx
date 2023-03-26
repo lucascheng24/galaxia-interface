@@ -5,7 +5,7 @@ import './auth/LoginInterface'
 import { Button, Card } from 'react-bootstrap';
 import { BrowserRouter, Link, Route, Routes, useNavigate } from 'react-router-dom'
 import LoginInterface from './auth/LoginInterface';
-import PlantSimulationPage from './plantSimulation/PlantSimulationPage'
+import PlanetSimulationPage from './plantSimulation/PlanetSimulationPage'
 import Layout from './Layout';
 import Home from './homePage/Home';
 import cover_threeSolar from './picture/cover_threeSolar.png'

@@ -3,7 +3,7 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 import App from '../App'
 
 
-const PlantSimulationPage = () => {
+const PlanetSimulationPage = () => {
     return(
         <Card>
             <CardHeader>
@@ -18,4 +18,4 @@ const PlantSimulationPage = () => {
     );
 }
 
-export default PlantSimulationPage;
+export default PlanetSimulationPage;
