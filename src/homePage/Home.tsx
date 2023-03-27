@@ -1,4 +1,4 @@
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Image  } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -7,16 +7,18 @@ const Home = () => {
     const navigate = useNavigate();
 
     return (
+    <body>
     <div>
       <Card>
-        <Card.Title className='App-Title'>GALAXIA</Card.Title>
-        <Card.Title className='App-Title'>CONNECT</Card.Title>
-          <Link to='/LoginInterface'>
-           <Button className='login-button common-cursor-pointer'>Click here to login</Button>
-          </Link>
+        <img src="../assets/logo3.png" alt="Logo" style={{ float: "left" }} />
+        <Link to='/LoginInterface'>
+          <Button className='login-button common-cursor-pointer'>Click here to login</Button>
+        </Link>
       </Card>
-    </div>);
-
+    </div>
+    </body>
+    );
+ 
   };
   
   export default Home;
