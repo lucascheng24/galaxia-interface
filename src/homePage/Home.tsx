@@ -1,24 +1,24 @@
-import { Card, Button, Image  } from "react-bootstrap";
+import { Card, Button, Image } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/logo3.png";
 
 const Home = () => {
-    // return <h1><div style={{'color':'#FFFFFF'}}>Home</div></h1>;
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    return (
-    <body>
+  return (
     <div>
       <Card>
-        <img src="../assets/logo3.png" alt="Logo" style={{ float: "left" }} />
-        <Link to='/LoginInterface'>
-          <Button className='login-button common-cursor-pointer'>Click here to login</Button>
-        </Link>
+        <Card.Body>
+          <Image src={logo} className="logo" alt="Logo" style={{ float: "left", height: 100, marginTop: "200px", marginLeft: "20px" }} />
+          <Link to="/LoginInterface" >
+            <Button className="login-button common-cursor-pointer" aria-label="Login button" style={{ float: "left", marginLeft: "-40px", marginTop: "400px", padding: "10px", paddingRight:"60px", paddingLeft:"60px", borderRadius:"10px", borderWidth:"1px" }}>
+              Click here to login
+            </Button>
+          </Link>
+        </Card.Body>
       </Card>
     </div>
-    </body>
-    );
- 
-  };
-  
-  export default Home;
+  );
+};
+
+export default Home;
