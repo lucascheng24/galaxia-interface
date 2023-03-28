@@ -1,11 +1,15 @@
-import { Grid } from '@mui/material';
+import React from 'react';
+import { Grid, Input } from '@mui/material';
+import { Card, Button, Image } from "react-bootstrap";
+import { Container } from 'react-bootstrap';
 import './LoginInterface.css';
+import logo from "../../assets/logo2.png";
 
 const LoginInterface = (props: any) => {
 
 
 
-  const as = () => {
+  const as = () => { 
     var xhr = new XMLHttpRequest()
 
     // get a callback when the server responds
@@ -43,24 +47,16 @@ const LoginInterface = (props: any) => {
   }
 
   return (
-    <Grid container className='common-PlainText'>
-      <Grid item xs={8} className='common-border-01'>
-        <div>xs=8</div>
-      </Grid>
-      <Grid item xs={4} className='common-border-01'>
-        <div>xs=4</div>
-      </Grid>
-      <Grid item xs={4} className='common-border-01'>
-        <div>xs=4</div>
-      </Grid>
-      <Grid item xs={8} className='common-border-01'>
-        <div>xs=8</div>
-      </Grid>
+    <Container>
 
-      <Grid item xs={4} className='common-border-01'>
-        <div>Register</div>
-      </Grid>
-    </Grid>
+    <div className="leftOverlay">
+      <Image src={logo} className="logo" alt="Logo"/>
+      <Button className='buttonLogin'>Login</Button>
+      <Button className='buttonRegister'>Register</Button>
+    </div>
+
+    </Container>
+
     /* <Container>
        <Row>
          <Col sm={2}>

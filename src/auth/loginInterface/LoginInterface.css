@@ -1,0 +1,47 @@
+.leftOverlay {
+    display: flex;
+    opacity: 100;
+    background: #E9E9E9;
+    z-index: 1;
+    position: absolute;
+    padding: 5px;
+    width: 400px;
+    height: 100%;
+    margin-top: -10px;
+    justify-content: center;
+  }
+
+  .logo{
+    margin-top: 240px;
+    height: 100px;
+  }
+
+  .buttonLogin{
+    color: white;
+    background-color: #2899DA;
+    justify-content: center;
+    display: flex;
+    z-index: 2;
+    position: absolute;
+    width:280px;
+    height:auto;
+    margin-top: 440px;
+    padding: 10px;
+    border-width: 0;
+    border-radius: 6px;
+  }
+
+  .buttonRegister{
+    justify-content: center;
+    display: flex;
+    z-index: 2;
+    position: absolute;
+    margin-top: 500px;
+    width:280px;
+    height:auto;
+    padding: 10px;
+    color: white;
+    background-color: #2899DA;
+    border-width: 0;
+    border-radius: 6px;
+  }
