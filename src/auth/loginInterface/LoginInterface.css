@@ -11,12 +11,12 @@
     justify-content: center;
   }
 
-  .logo{
+.logo{
     margin-top: 240px;
     height: 100px;
-  }
+}
 
-  .buttonLogin{
+.buttonLogin, .buttonRegister{
     color: white;
     background-color: #2899DA;
     justify-content: center;
@@ -25,25 +25,16 @@
     position: absolute;
     width:280px;
     height:auto;
+    padding: 10px;
+    border-width: 0;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.buttonLogin{
     margin-top: 440px;
-    padding: 10px;
-    border-width: 0;
-    border-radius: 6px;
-    font-size: 16px;
-  }
+}
 
-  .buttonRegister{
-    justify-content: center;
-    display: flex;
-    z-index: 2;
-    position: absolute;
+.buttonRegister{
     margin-top: 500px;
-    width:280px;
-    height:auto;
-    padding: 10px;
-    color: white;
-    background-color: #2899DA;
-    border-width: 0;
-    border-radius: 6px;
-    font-size: 16px;
-  }
+}
