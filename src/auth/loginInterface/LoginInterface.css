@@ -29,6 +29,7 @@
     padding: 10px;
     border-width: 0;
     border-radius: 6px;
+    font-size: 16px;
   }
 
   .buttonRegister{
@@ -44,4 +45,5 @@
     background-color: #2899DA;
     border-width: 0;
     border-radius: 6px;
+    font-size: 16px;
   }
