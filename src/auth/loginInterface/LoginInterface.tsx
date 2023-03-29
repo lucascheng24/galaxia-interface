@@ -7,6 +7,7 @@ import '../../commonLibrary/Common.css';
 import logo from "../../assets/logo2.png";
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGININTERFACE_PAGEMODE_TYPE } from './LoginInterfaceType';
+import login_request from './LoginApi';
 
 
 //  define state object
@@ -14,6 +15,12 @@ interface stateInterface {
   page: string,
   page_mode: LOGININTERFACE_PAGEMODE_TYPE,
   loginInput: {
+    emailAddress?: string,
+    password?: string,
+    rePassword?: string
+  },
+
+  inputErrorMessage: {
     emailAddress?: string,
     password?: string,
     rePassword?: string
@@ -26,7 +33,7 @@ const initialState: stateInterface = {
   page: 'Login Interface',
   page_mode: LOGININTERFACE_PAGEMODE_TYPE.default,
   loginInput: {},
-
+  inputErrorMessage: {},
 }
 
 //  define action type
@@ -34,6 +41,7 @@ const enum actionType {
   CHANGE_PAGE,
   CHANGE_PAGE_MODE,
   ONCHANGE_LOGININPUT,
+  UPDATE_LOGININPUT_ERROR_MESSAGE,
 }
 
 //  define action class
@@ -46,6 +54,10 @@ type actionClass = {
 } | {
   type: actionType.ONCHANGE_LOGININPUT,
   key: keyof stateInterface['loginInput'] ,
+  value?: string
+} | {
+  type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE,
+  key: keyof stateInterface['inputErrorMessage'] ,
   value?: string
 }
 
@@ -67,6 +79,14 @@ const reducer = (state = initialState, action: actionClass) => {
           [action.key]: action.value
         }
       }
+    case actionType.UPDATE_LOGININPUT_ERROR_MESSAGE:
+      return {
+        ...state,
+        inputErrorMessage: {
+          ...state.inputErrorMessage,
+          [action.key]: action.value
+        }
+      }
     default:
       return state;
   }
@@ -80,6 +100,31 @@ const LoginInterface = (props: any) => {
   const navigate = useNavigate();
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+
+  const request_LoginAccount = () => {
+    //  call api '/login'
+
+    const username = state.loginInput.emailAddress;
+    const password = state.loginInput.password;
+
+
+    dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'emailAddress', value: undefined})
+    dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'password', value: undefined})
+
+    if (username && password) {
+      login_request(username, password)
+    } else {
+      if (!username) {
+        dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'emailAddress', value: 'Please enter email address'})
+      }
+      if (!password) {
+        dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'password', value: 'Please enter password'})
+      }
+    }
+
+    
+  }
 
 
   return (
@@ -112,17 +157,21 @@ const LoginInterface = (props: any) => {
             </Grid>
             <Grid>
               <TextField 
-                id="outlined-basic" 
+                id="outlined-basic-login-email" 
                 label="Email address" 
                 variant="outlined" 
+                error={state.inputErrorMessage.emailAddress ? true : false}
+                helperText={state.inputErrorMessage.emailAddress??``}
                 value={state.loginInput.emailAddress}
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'emailAddress', value: e.target.value})}
               />
               <TextField  
-                id="outlined-basic" 
+                id="outlined-basic-login-pw" 
                 label="Password" 
                 variant="outlined"
                 type={'password'}
+                error={state.inputErrorMessage.password ? true : false}
+                helperText={state.inputErrorMessage.password??``}
                 value={state.loginInput.password}
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'password', value: e.target.value})}
               />
@@ -133,7 +182,7 @@ const LoginInterface = (props: any) => {
             </Grid>
             <Grid font-black>
               <Button className='buttonLogin-2' style={{'marginLeft': '4rem'}}
-                onClick={() => dispatch({type: actionType.CHANGE_PAGE_MODE, value: LOGININTERFACE_PAGEMODE_TYPE.login})}
+                onClick={() => request_LoginAccount()}
               >Login</Button>
 
               <Link className='standard-small-font' to={''}
@@ -157,25 +206,31 @@ const LoginInterface = (props: any) => {
             </Grid>
             <Grid>
               <TextField 
-                id="outlined-basic" 
+                id="outlined-basic-register-email" 
                 label="Email address" 
                 variant="outlined" 
+                error={state.inputErrorMessage.emailAddress ? true : false}
+                helperText={state.inputErrorMessage.emailAddress??``}
                 value={state.loginInput.emailAddress}
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'emailAddress', value: e.target.value})}
               />
               <TextField  
-                id="outlined-basic" 
+                id="outlined-basic-register-pw" 
                 label="Password" 
                 variant="outlined"
                 type={'password'}
+                error={state.inputErrorMessage.password ? true : false}
+                helperText={state.inputErrorMessage.password??``}
                 value={state.loginInput.password}
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'password', value: e.target.value})}
               />
               <TextField  
-                id="outlined-basic" 
+                id="outlined-basic-register-repw" 
                 label="Re-Password" 
                 variant="outlined"
                 type={'password'}
+                error={state.inputErrorMessage.rePassword ? true : false}
+                helperText={state.inputErrorMessage.rePassword??``}
                 value={state.loginInput.rePassword}
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'rePassword', value: e.target.value})}
               />
