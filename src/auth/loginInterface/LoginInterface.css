@@ -9,32 +9,39 @@
     height: 100%;
     margin-top: -10px;
     justify-content: center;
-  }
+}
 
-.logo{
+.logo {
     margin-top: 240px;
     height: 100px;
 }
 
-.buttonLogin, .buttonRegister{
+.logo-2 {
+    margin-top: 140px;
+    height: 100px;
+}
+
+.buttonLogin,
+.buttonRegister {
     color: white;
     background-color: #2899DA;
     justify-content: center;
     display: flex;
     z-index: 2;
     position: absolute;
-    width:280px;
-    height:auto;
+    width: 280px;
+    height: auto;
     padding: 10px;
     border-width: 0;
     border-radius: 6px;
     font-size: 16px;
 }
 
-.buttonLogin{
-    margin-top: 440px;
-}
 
-.buttonRegister{
-    margin-top: 500px;
+/* .buttonLogin{
+    margin-top: 440px;
+} */
+
+.buttonRegister {
+    margin-top: 4rem;
 }

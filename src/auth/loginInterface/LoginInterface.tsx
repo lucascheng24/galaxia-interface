@@ -1,35 +1,43 @@
 import React, { useReducer } from 'react';
-import { Grid, Input } from '@mui/material';
+import { Grid, Input, TextField } from '@mui/material';
 import { Card, Button, Image } from "react-bootstrap";
 import { Container } from 'react-bootstrap';
 import './LoginInterface.css';
+import '../../commonLibrary/Common.css';
 import logo from "../../assets/logo2.png";
+import { Link, useNavigate } from 'react-router-dom';
+import { LOGININTERFACE_PAGEMODE_TYPE } from './LoginInterfaceType';
 
 
+//  define state object
 interface stateInterface {
   page: string,
-  page_mode: 'default' | 'login' | 'register',
+  page_mode: LOGININTERFACE_PAGEMODE_TYPE,
 
 }
 
+//  define initial state
 const initialState: stateInterface = {
   page: 'Login Interface',
-  page_mode: 'default'
+  page_mode: LOGININTERFACE_PAGEMODE_TYPE.default
 }
 
+//  define action type
 const enum actionType {
   CHANGE_PAGE,
   CHANGE_PAGE_MODE,
 }
 
+//  define action class
 type actionClass = {
   type: actionType.CHANGE_PAGE,
   value: string //  page
 } | {
   type: actionType.CHANGE_PAGE_MODE,
-  value: 'default' | 'login' | 'register' //  page_mode
+  value: LOGININTERFACE_PAGEMODE_TYPE //  page_mode
 }
 
+//  reducer to handle state by different actions
 const reducer = (state = initialState, action: actionClass) => {
   switch (action.type) {
     case actionType.CHANGE_PAGE:
@@ -49,17 +57,56 @@ const reducer = (state = initialState, action: actionClass) => {
 
 const LoginInterface = (props: any) => {
 
+  const navigate = useNavigate();
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
 
   return (
     <Container>
-      <div className="leftOverlay">
-        <Image src={logo} className="logo" alt="Logo"/>
-        <Button className='buttonLogin'>Login</Button>
-        <Button className='buttonRegister'>Register</Button>
-      </div>
+      <Grid item xs={4} className="leftOverlay">
+        {/* default UI */}
+        { state.page_mode == LOGININTERFACE_PAGEMODE_TYPE.default &&
+          <div>
+            <Image src={logo} className="logo" alt="Logo"/>
+            <Button className='buttonLogin' 
+              onClick={() => dispatch({type: actionType.CHANGE_PAGE_MODE, value: LOGININTERFACE_PAGEMODE_TYPE.login})}
+            >Login</Button>
+
+            <Button className='buttonRegister'
+              onClick={() => dispatch({type: actionType.CHANGE_PAGE_MODE, value: LOGININTERFACE_PAGEMODE_TYPE.register})}
+            >Register</Button>
+
+          </div>
+        }
+
+        {/* login UI  */}
+        { state.page_mode == LOGININTERFACE_PAGEMODE_TYPE.login &&
+          <div>
+            <Image src={logo} className="logo-2" alt="Logo"/>
+            <Grid>
+              Sign In
+            </Grid>
+            <Grid className='standard-small-font font-black'>
+              sign in and start connect with friends
+            </Grid>
+            <Grid>
+              <TextField id="outlined-basic" label="Email address" variant="outlined" />
+              <TextField type={'password'} id="outlined-basic" label="Password" variant="outlined" />
+            </Grid>
+            {/* <Button className='buttonLogin' 
+              onClick={() => dispatch({type: actionType.CHANGE_PAGE_MODE, value: LOGININTERFACE_PAGEMODE_TYPE.login})}
+            >Login</Button>
+
+            <Link className='' to={''}
+              onClick={() => dispatch({ type: actionType.CHANGE_PAGE_MODE, value: LOGININTERFACE_PAGEMODE_TYPE.register })}
+            >Register</Link> */}
+
+          </div>
+        }
+        
+      </Grid>
+      <Grid item xs={8}><a onClick={() => navigate(-1)}>back to previous page</a></Grid>
     </Container>
 
     /* <Container>

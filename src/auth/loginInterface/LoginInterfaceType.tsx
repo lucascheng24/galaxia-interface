@@ -1,0 +1,1 @@
+export const enum LOGININTERFACE_PAGEMODE_TYPE {'default', 'login', 'register' }
