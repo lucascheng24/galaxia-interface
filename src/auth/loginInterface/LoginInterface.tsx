@@ -1,60 +1,65 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { Grid, Input } from '@mui/material';
 import { Card, Button, Image } from "react-bootstrap";
 import { Container } from 'react-bootstrap';
 import './LoginInterface.css';
 import logo from "../../assets/logo2.png";
 
+
+interface stateInterface {
+  page: string,
+  page_mode: 'default' | 'login' | 'register',
+
+}
+
+const initialState: stateInterface = {
+  page: 'Login Interface',
+  page_mode: 'default'
+}
+
+const enum actionType {
+  CHANGE_PAGE,
+  CHANGE_PAGE_MODE,
+}
+
+type actionClass = {
+  type: actionType.CHANGE_PAGE,
+  value: string //  page
+} | {
+  type: actionType.CHANGE_PAGE_MODE,
+  value: 'default' | 'login' | 'register' //  page_mode
+}
+
+const reducer = (state = initialState, action: actionClass) => {
+  switch (action.type) {
+    case actionType.CHANGE_PAGE:
+      return state;
+    case actionType.CHANGE_PAGE_MODE:
+      return {
+        ...state,
+        page_mode: action.value
+      }
+    default:
+      return state;
+  }
+};
+
+
+
+
 const LoginInterface = (props: any) => {
 
 
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const as = () => { 
-    var xhr = new XMLHttpRequest()
-
-    // get a callback when the server responds
-    xhr.addEventListener('load', () => {
-      // update the state of the component with the result here
-      console.log(xhr.responseText)
-    })
-    // open the request with the verb and the url
-    xhr.open('GET', 'https://dog.ceo/api/breeds/list/all')
-    // send the request
-    xhr.send()
-  }
-
-  const qw = () => {
-    fetch('/myserver.endpoint', {
-      method: 'POST',
-      body: JSON.stringify({
-        // Add parameters here
-        context: 'ascsac'
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        'token': 'xxx'
-      },
-    }).then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        // Handle data
-
-        
-       })
-       .catch((err) => {
-          console.log(err.message);
-       });
-  }
 
   return (
     <Container>
-
-    <div className="leftOverlay">
-      <Image src={logo} className="logo" alt="Logo"/>
-      <Button className='buttonLogin'>Login</Button>
-      <Button className='buttonRegister'>Register</Button>
-    </div>
-
+      <div className="leftOverlay">
+        <Image src={logo} className="logo" alt="Logo"/>
+        <Button className='buttonLogin'>Login</Button>
+        <Button className='buttonRegister'>Register</Button>
+      </div>
     </Container>
 
     /* <Container>
