@@ -1,29 +1,58 @@
 import axios from "axios";
 import { common_request } from "../../commonLibrary/httpStandard";
+import { Role } from "../../commonLibrary/userClass";
 
 const baseUrl = common_request.serverBaseUrl
 
-const login_request = (username: string, hashedPw: string) => {
+
+export interface LoginRequest {
+    username: string,
+    password: string,
+    rememberMe: boolean
+}
+
+
+export interface RegisterRequest {
+    username: string,
+    password: string,
+    role: Role,
+    email: string
+}
+
+const login_request = (loginRequest: LoginRequest) => {
     //  api of something
 
     var apiPath = baseUrl + '/login'
 
-    axios.get(apiPath, {
-        params: {
-            context: 'ascsac',
-            username: username,
-            password: hashedPw
-        },
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            'token': 'xxx'
-        }
-
+    axios.post(apiPath, {
+        loginRequest: loginRequest
     }).then(response => {
         console.log(response.data)
 
     }).catch(error => {
 
+    })
+}
+
+
+
+const register_request = (registerRequest: RegisterRequest) => {
+    //  api of something
+
+    var apiPath = baseUrl + '/sign-up'
+
+    axios.post(apiPath, {
+        request: registerRequest
+    },{
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            'token': 'xxx'
+        }
+    }).then(response => {
+        console.log(response.data)
+
+    }).catch(error => {
+        console.log(error)
     })
 }
 
@@ -44,7 +73,7 @@ const sample_01 = () => {
 }
 
 // sample_02
-const request = (input: any) => {
+const request_02 = (input: any) => {
     fetch('/myserver.endpoint', {   //  '/myserver.endpoint' is the sample of api path 
         method: 'POST',
         body: JSON.stringify({

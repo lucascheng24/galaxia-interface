@@ -7,7 +7,9 @@ import '../../commonLibrary/Common.css';
 import logo from "../../assets/logo2.png";
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGININTERFACE_PAGEMODE_TYPE } from './LoginInterfaceType';
-import login_request from './LoginApi';
+import login_request, { LoginRequest, RegisterRequest } from './LoginApi';
+import register_request from '../registAc/registAcApi';
+import { Role } from '../../commonLibrary/userClass';
 
 
 //  define state object
@@ -113,7 +115,17 @@ const LoginInterface = (props: any) => {
     dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'password', value: undefined})
 
     if (username && password) {
-      login_request(username, password)
+
+      var requestBody: LoginRequest = {
+        username: username, 
+        password: password, 
+        rememberMe: false
+      }
+      //  send api
+      login_request(requestBody)
+
+
+
     } else {
       if (!username) {
         dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'emailAddress', value: 'Please enter email address'})
@@ -125,6 +137,57 @@ const LoginInterface = (props: any) => {
 
     
   }
+
+
+
+  const request_RegisterAccount = () => {
+    //  call api '/sign-up'
+
+    const username = state.loginInput.emailAddress;
+    const password = state.loginInput.password;
+    const rePassword = state.loginInput.rePassword;
+
+
+    dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'emailAddress', value: undefined})
+    dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'password', value: undefined})
+    dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'rePassword', value: undefined})
+
+    if ((username && password) && (password === rePassword)) {
+
+      var requestBody: RegisterRequest = {
+        username: username, 
+        password: password, 
+        role: Role.USER,
+        email: username
+      }
+      //  send api
+      register_request(requestBody)
+
+    } else {
+      if (!username) {
+        dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'emailAddress', value: 'Please enter email address'})
+      }
+      if (!password) {
+        dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'password', value: 'Please enter password'})
+      }
+      if (password != rePassword) {
+        dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'rePassword', value: 'Please enter password same as previous one'})
+      }
+    }
+  }
+
+
+  const onChange_RePassword = (rePassword: string) => {
+    dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'rePassword', value: rePassword})
+    dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'rePassword', value: undefined})
+
+
+    const password = state.loginInput.password;
+
+    if (password != rePassword) {
+      dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'rePassword', value: 'Please enter password same as previous one'})
+    }
+  } 
 
 
   return (
@@ -232,7 +295,7 @@ const LoginInterface = (props: any) => {
                 error={state.inputErrorMessage.rePassword ? true : false}
                 helperText={state.inputErrorMessage.rePassword??``}
                 value={state.loginInput.rePassword}
-                onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'rePassword', value: e.target.value})}
+                onChange = {(e) => onChange_RePassword(e.target.value)}
               />
             </Grid>
             <Grid className='standard-small-font font-black'>
@@ -242,7 +305,7 @@ const LoginInterface = (props: any) => {
             </Grid>
             <Grid font-black>
               <Button className='buttonLogin-2' style={{'marginLeft': '4rem'}}
-                onClick={() => dispatch({type: actionType.CHANGE_PAGE_MODE, value: LOGININTERFACE_PAGEMODE_TYPE.login})}
+                onClick={() => request_RegisterAccount()}
               >Register</Button>
 
               {/* <Link className='standard-small-font' to={''}
