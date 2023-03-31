@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useContext, useReducer } from 'react';
 import { Grid, TextField } from '@mui/material';
 import { Button, Image } from "react-bootstrap";
 import { Container } from 'react-bootstrap';
@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { LOGININTERFACE_PAGEMODE_TYPE } from './LoginInterfaceType';
 import login_request, { LoginRequest, RegisterRequest, register_request } from './LoginApi';
 import { Role } from '../../commonLibrary/userClass';
+import { useAuth } from '../UserProfileContext';
 
 
 //  define state object
@@ -102,6 +103,9 @@ const reducer = (state = initialState, action: actionClass) => {
 const LoginInterface = (props: any) => {
 
   const navigate = useNavigate();
+  const { userProfile, setUserProfile } = useAuth();
+
+  // console.log('userProfile?.username: ', userProfile?.username)
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -176,7 +180,7 @@ const LoginInterface = (props: any) => {
       if (!password) {
         dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'password', value: 'Please enter password'})
       }
-      if (password != rePassword) {
+      if (password !== rePassword) {
         dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'rePassword', value: 'Please enter password same as previous one'})
       }
     }
@@ -190,7 +194,7 @@ const LoginInterface = (props: any) => {
 
     const password = state.loginInput.password;
 
-    if (password != rePassword) {
+    if (password !== rePassword) {
       dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'rePassword', value: 'Please enter password same as previous one'})
     }
   } 
