@@ -13,13 +13,13 @@ export interface LoginRequest {
 
 
 export interface RegisterRequest {
-    username: string,
+    userName: string,
     password: string,
     role: Role,
     email: string
 }
 
-const login_request = (loginRequest: LoginRequest) => {
+export const login_request = (loginRequest: LoginRequest) => {
     //  api of something
 
     var apiPath = baseUrl + '/login'
@@ -30,13 +30,13 @@ const login_request = (loginRequest: LoginRequest) => {
         console.log(response.data)
 
     }).catch(error => {
-
+        console.log(error)
     })
 }
 
 
 
-const register_request = (registerRequest: RegisterRequest) => {
+export const register_request = (registerRequest: RegisterRequest) => {
     //  api of something
 
     var apiPath = baseUrl + '/sign-up'

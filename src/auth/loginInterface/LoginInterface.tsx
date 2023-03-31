@@ -7,8 +7,7 @@ import '../../commonLibrary/Common.css';
 import logo from "../../assets/logo2.png";
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGININTERFACE_PAGEMODE_TYPE } from './LoginInterfaceType';
-import login_request, { LoginRequest, RegisterRequest } from './LoginApi';
-import register_request from '../registAc/registAcApi';
+import login_request, { LoginRequest, RegisterRequest, register_request } from './LoginApi';
 import { Role } from '../../commonLibrary/userClass';
 
 
@@ -17,12 +16,14 @@ interface stateInterface {
   page: string,
   page_mode: LOGININTERFACE_PAGEMODE_TYPE,
   loginInput: {
+    username?: string
     emailAddress?: string,
     password?: string,
     rePassword?: string
   },
 
   inputErrorMessage: {
+    username?: string
     emailAddress?: string,
     password?: string,
     rePassword?: string
@@ -71,7 +72,8 @@ const reducer = (state = initialState, action: actionClass) => {
     case actionType.CHANGE_PAGE_MODE:
       return {
         ...state,
-        page_mode: action.value
+        page_mode: action.value,
+        loginInput: {}  //  initial the input whenever change page mode
       }
     case actionType.ONCHANGE_LOGININPUT:
       return {
@@ -107,11 +109,11 @@ const LoginInterface = (props: any) => {
   const request_LoginAccount = () => {
     //  call api '/login'
 
-    const username = state.loginInput.emailAddress;
-    const password = state.loginInput.password;
+    const username = state.loginInput.username?.trim();
+    const password = state.loginInput.password?.trim();
 
 
-    dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'emailAddress', value: undefined})
+    dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'username', value: undefined})
     dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'password', value: undefined})
 
     if (username && password) {
@@ -128,7 +130,7 @@ const LoginInterface = (props: any) => {
 
     } else {
       if (!username) {
-        dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'emailAddress', value: 'Please enter email address'})
+        dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'username', value: 'Please enter username'})
       }
       if (!password) {
         dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'password', value: 'Please enter password'})
@@ -143,28 +145,32 @@ const LoginInterface = (props: any) => {
   const request_RegisterAccount = () => {
     //  call api '/sign-up'
 
-    const username = state.loginInput.emailAddress;
-    const password = state.loginInput.password;
-    const rePassword = state.loginInput.rePassword;
+    const username = state.loginInput.username?.trim();
+    const emailAddress = state.loginInput.emailAddress?.trim();
+    const password = state.loginInput.password?.trim();
+    const rePassword = state.loginInput.rePassword?.trim();
 
-
+    dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'username', value: undefined})
     dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'emailAddress', value: undefined})
     dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'password', value: undefined})
     dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'rePassword', value: undefined})
 
-    if ((username && password) && (password === rePassword)) {
+    if ((username && password && emailAddress) && (password === rePassword)) {
 
       var requestBody: RegisterRequest = {
-        username: username, 
+        userName: username, 
         password: password, 
         role: Role.USER,
-        email: username
+        email: emailAddress
       }
       //  send api
       register_request(requestBody)
 
     } else {
       if (!username) {
+        dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'username', value: 'Please enter user name'})
+      }
+      if (!emailAddress) {
         dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'emailAddress', value: 'Please enter email address'})
       }
       if (!password) {
@@ -221,7 +227,7 @@ const LoginInterface = (props: any) => {
             <Grid>
               <TextField 
                 id="outlined-basic-login-email" 
-                label="Email address" 
+                label="User Name" 
                 variant="outlined" 
                 error={state.inputErrorMessage.emailAddress ? true : false}
                 helperText={state.inputErrorMessage.emailAddress??``}
@@ -268,6 +274,15 @@ const LoginInterface = (props: any) => {
               sign in and start connect with friends
             </Grid>
             <Grid>
+              <TextField 
+                id="outlined-basic-login-email" 
+                label="User Name" 
+                variant="outlined" 
+                error={state.inputErrorMessage.username ? true : false}
+                helperText={state.inputErrorMessage.username??``}
+                value={state.loginInput.username}
+                onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'username', value: e.target.value})}
+              />
               <TextField 
                 id="outlined-basic-register-email" 
                 label="Email address" 
