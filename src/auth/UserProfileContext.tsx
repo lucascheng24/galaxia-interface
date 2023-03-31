@@ -34,28 +34,3 @@ export const AuthContextProvider: FC<CProps> = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
-
-// const AuthContext = createContext({
-//     username: undefined,
-//     emailAddress: undefined,
-//     role: undefined,
-//     token: undefined,
-// });
-
-// // @ts-ignore
-// export const AuthContextProvider = ({children}) => {
-//     const [authContext, setAuthContext] = useState(AuthContext);
-
-//     const passingValue = {
-//         authContext,
-//         setAuthContext
-//     }
-  
-//     return (
-//       <AuthContext.Provider value={passingValue} >
-//         {children}
-//       </AuthContext.Provider>
-//     );
-// };
-  
-// export default AuthContext;
