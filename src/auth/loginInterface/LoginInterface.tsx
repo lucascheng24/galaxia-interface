@@ -222,10 +222,10 @@ const LoginInterface = (props: any) => {
         { state.page_mode === LOGININTERFACE_PAGEMODE_TYPE.login &&
           <div>
             <Image src={logo} className="logo-2" alt="Logo"/>
-            <Grid>
+            <Grid className='SigninText-1'>
               Sign In
             </Grid>
-            <Grid className='standard-small-font font-black'>
+            <Grid className='SigninText-2'>
               sign in and start connect with friends
             </Grid>
             <Grid>
