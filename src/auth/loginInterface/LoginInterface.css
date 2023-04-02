@@ -44,12 +44,17 @@
     justify-content: center;
     display: flex;
     z-index: 2;
+    position: absolute;
     width: 280px;
     height: auto;
     padding: 10px;
     border-width: 0;
     border-radius: 6px;
     font-size: 16px;
+}
+
+.buttonLogin-2{
+    margin-left: 3.45rem;
 }
 
 .buttonLogin:hover, .buttonRegister:hover, .buttonLogin-2:hover, .buttonRegister-2:hover{
@@ -70,17 +75,31 @@
     height: 100px;
 }
 
-.SigninText-1, .SigninText-2{
+.TitleText-1, .TitleText-2{
     color: #0A2478;
 }
 
-.SigninText-1{
+.TitleText-1{
     font-size: 2rem;
-    padding-top: 2rem;
-    font-weight: 400;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-weight: 500;
 }
 
-.SigninText-2{
-    padding-top: 2rem;
-    font-size: 1rem;
+.TitleText-2{
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    font-size: 0.9rem;
 }
+
+.inputField{
+    font-size: 0.9rem;
+    width: 280px;
+    background-color: white;
+}
+
+.alertMeassage{
+    color: #FF5050;
+    font-size: 0.9rem;
+}
+

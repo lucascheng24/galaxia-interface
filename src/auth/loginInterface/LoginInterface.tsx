@@ -222,14 +222,15 @@ const LoginInterface = (props: any) => {
         { state.page_mode === LOGININTERFACE_PAGEMODE_TYPE.login &&
           <div>
             <Image src={logo} className="logo-2" alt="Logo"/>
-            <Grid className='SigninText-1'>
+            <Grid className='TitleText-1'>
               Sign In
             </Grid>
-            <Grid className='SigninText-2'>
+            <Grid className='TitleText-2'>
               sign in and start connect with friends
             </Grid>
             <Grid>
               <TextField 
+                className='inputField'
                 id="outlined-basic-login-email" 
                 label="User Name" 
                 variant="outlined" 
@@ -239,6 +240,7 @@ const LoginInterface = (props: any) => {
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'emailAddress', value: e.target.value})}
               />
               <TextField  
+                className='inputField'
                 id="outlined-basic-login-pw" 
                 label="Password" 
                 variant="outlined"
@@ -249,12 +251,12 @@ const LoginInterface = (props: any) => {
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'password', value: e.target.value})}
               />
             </Grid>
-            <Grid className='standard-small-font font-black'>
+            <Grid className='standard-small-font font-black' hidden>
               <div>email address: {state.loginInput.emailAddress} </div>
               <div>password: {state.loginInput.password} </div>
             </Grid>
             <Grid font-black>
-              <Button className='buttonLogin-2' style={{'marginLeft': '4rem'}}
+              <Button className='buttonLogin-2'
                 onClick={() => request_LoginAccount()}
               >Login</Button>
 
@@ -271,10 +273,10 @@ const LoginInterface = (props: any) => {
         { state.page_mode === LOGININTERFACE_PAGEMODE_TYPE.register &&
           <div>
             <Image src={logo} className="logo-2" alt="Logo"/>
-            <Grid>
+            <Grid className='TitleText-1'>
               Register
             </Grid>
-            <Grid className='standard-small-font font-black'>
+            <Grid className='TitleText-2'>
               sign in and start connect with friends
             </Grid>
             <Grid>
@@ -323,7 +325,7 @@ const LoginInterface = (props: any) => {
               <div>re-password: {state.loginInput.rePassword} </div>
             </Grid>
             <Grid font-black>
-              <Button className='buttonLogin-2' style={{'marginLeft': '4rem'}}
+              <Button className='buttonLogin-2'
                 onClick={() => request_RegisterAccount()}
               >Register</Button>
 
