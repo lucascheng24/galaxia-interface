@@ -233,22 +233,65 @@ const LoginInterface = (props: any) => {
                 className='inputField'
                 id="outlined-basic-login-email" 
                 label="User Name" 
-                variant="outlined" 
+                size='small'
+                margin='normal'
                 error={state.inputErrorMessage.emailAddress ? true : false}
                 helperText={state.inputErrorMessage.emailAddress??``}
                 value={state.loginInput.emailAddress}
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'emailAddress', value: e.target.value})}
+                sx={{
+                  backgroundColor: '#0A2478',
+                  color: '#FFFFFF',
+                  borderWidth: '0',
+                  borderRadius:'0.5rem',
+                  width: '280px',
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: 'white',
+                    fontSize: '0.9rem',
+                  },
+                }}
+                inputProps={{
+                  sx: {
+                    color: 'white',
+                    paddingLeft: '15px',
+                    fontSize: '0.9rem',
+                  },
+                }}
+                variant='filled'
               />
               <TextField  
                 className='inputField'
                 id="outlined-basic-login-pw" 
                 label="Password" 
-                variant="outlined"
                 type={'password'}
+                size='small'
                 error={state.inputErrorMessage.password ? true : false}
                 helperText={state.inputErrorMessage.password??``}
                 value={state.loginInput.password}
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'password', value: e.target.value})}
+                sx={{
+                  backgroundColor: '#0A2478',
+                  color: '#FFFFFF',
+                  borderWidth: '0',
+                  borderRadius:'0.5rem',
+                  width: '280px',
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: 'white',
+                    fontSize: '0.9rem',
+                  },
+                }}
+                inputProps={{
+                  sx: {
+                    color: 'white',
+                    paddingLeft: '15px',
+                    fontSize: '0.9rem',
+                  },
+                }}
+                variant='filled'
               />
             </Grid>
             <Grid className='standard-small-font font-black' hidden>
@@ -283,43 +326,129 @@ const LoginInterface = (props: any) => {
               <TextField 
                 id="outlined-basic-login-email" 
                 label="User Name" 
-                variant="outlined" 
+                variant="filled" 
+                size='small'
+                margin='normal'
                 error={state.inputErrorMessage.username ? true : false}
                 helperText={state.inputErrorMessage.username??``}
                 value={state.loginInput.username}
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'username', value: e.target.value})}
+                sx={{
+                  backgroundColor: '#0A2478',
+                  color: '#FFFFFF',
+                  borderWidth: '0',
+                  borderRadius:'0.5rem',
+                  width: '280px',
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: 'white',
+                    fontSize: '0.9rem',
+                  },
+                }}
+                inputProps={{
+                  sx: {
+                    color: 'white',
+                    paddingLeft: '15px',
+                    fontSize: '0.9rem',
+                  },
+                }}
               />
               <TextField 
                 id="outlined-basic-register-email" 
                 label="Email address" 
-                variant="outlined" 
+                variant="filled" 
+                size='small'
                 error={state.inputErrorMessage.emailAddress ? true : false}
                 helperText={state.inputErrorMessage.emailAddress??``}
                 value={state.loginInput.emailAddress}
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'emailAddress', value: e.target.value})}
+                sx={{
+                  backgroundColor: '#0A2478',
+                  color: '#FFFFFF',
+                  borderWidth: '0',
+                  borderRadius:'0.5rem',
+                  width: '280px',
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: 'white',
+                    fontSize: '0.9rem',
+                  },
+                }}
+                inputProps={{
+                  sx: {
+                    color: 'white',
+                    paddingLeft: '15px',
+                    fontSize: '0.9rem',
+                  },
+                }}
               />
               <TextField  
                 id="outlined-basic-register-pw" 
                 label="Password" 
-                variant="outlined"
+                variant="filled"
                 type={'password'}
+                size='small'
+                margin='normal'
                 error={state.inputErrorMessage.password ? true : false}
                 helperText={state.inputErrorMessage.password??``}
                 value={state.loginInput.password}
                 onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'password', value: e.target.value})}
+                sx={{
+                  backgroundColor: '#0A2478',
+                  color: '#FFFFFF',
+                  borderWidth: '0',
+                  borderRadius:'0.5rem',
+                  width: '280px',
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: 'white',
+                    fontSize: '0.9rem',
+                  },
+                }}
+                inputProps={{
+                  sx: {
+                    color: 'white',
+                    paddingLeft: '15px',
+                    fontSize: '0.9rem',
+                  },
+                }}
               />
               <TextField  
                 id="outlined-basic-register-repw" 
                 label="Re-Password" 
-                variant="outlined"
+                variant="filled"
                 type={'password'}
+                size='small'
                 error={state.inputErrorMessage.rePassword ? true : false}
                 helperText={state.inputErrorMessage.rePassword??``}
                 value={state.loginInput.rePassword}
                 onChange = {(e) => onChange_RePassword(e.target.value)}
+                sx={{
+                  backgroundColor: '#0A2478',
+                  color: '#FFFFFF',
+                  borderWidth: '0',
+                  borderRadius:'0.5rem',
+                  width: '280px',
+                }}
+                InputLabelProps={{
+                  sx: {
+                    color: 'white',
+                    fontSize: '0.9rem',
+                  },
+                }}
+                inputProps={{
+                  sx: {
+                    color: 'white',
+                    paddingLeft: '15px',
+                    fontSize: '0.9rem',
+                  },
+                }}
               />
             </Grid>
-            <Grid className='standard-small-font font-black'>
+            <Grid className='standard-small-font font-black' hidden>
               <div>email address: {state.loginInput.emailAddress} </div>
               <div>password: {state.loginInput.password} </div>
               <div>re-password: {state.loginInput.rePassword} </div>
