@@ -10,6 +10,8 @@ import Layout from './Layout';
 import Home from './homePage/Home';
 import cover_threeSolar from './picture/cover_threeSolar.png'
 import { AuthContextProvider } from './auth/UserProfileContext';
+import { ResponseInterceptor } from './interceptors/ResponseInterceptor';
+import { RequestInterceptor } from './interceptors/RequestInterceptor';
 
 
 const App = () => {
@@ -32,13 +34,17 @@ const App = () => {
   return (
     <div className="App" style={myStyle_backgroundImage}>
       <AuthContextProvider>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/LoginInterface" element={<LoginInterface />} />
-          {/* <Route path="/test" element={<Test />}></Route> */}
-          {/* <Route index element={<div className='App-Title'>這是首頁</div>}></Route> */}
-          {/* <Route path="*" element={<NotFound />}></Route> */}
-        </Routes>
+        <RequestInterceptor>
+          <ResponseInterceptor>
+            <Routes>
+              <Route index element={<Home />} />
+              <Route path="/LoginInterface" element={<LoginInterface />} />
+              {/* <Route path="/test" element={<Test />}></Route> */}
+              {/* <Route index element={<div className='App-Title'>這是首頁</div>}></Route> */}
+              {/* <Route path="*" element={<NotFound />}></Route> */}
+            </Routes>
+          </ResponseInterceptor>
+        </RequestInterceptor>
       </AuthContextProvider>
       {/* <Card.Text>GALAXIA</Card.Text>
       <Card.Text>CONNECT</Card.Text> */}
