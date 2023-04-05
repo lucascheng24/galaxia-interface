@@ -74,7 +74,8 @@ const reducer = (state = initialState, action: actionClass) => {
       return {
         ...state,
         page_mode: action.value,
-        loginInput: {}  //  initial the input whenever change page mode
+        loginInput: {},  //  initial the input whenever change page mode
+        inputErrorMessage: {}
       }
     case actionType.ONCHANGE_LOGININPUT:
       return {
@@ -235,10 +236,10 @@ const LoginInterface = (props: any) => {
                 label="User Name" 
                 size='small'
                 margin='normal'
-                error={state.inputErrorMessage.emailAddress ? true : false}
-                helperText={state.inputErrorMessage.emailAddress??``}
-                value={state.loginInput.emailAddress}
-                onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'emailAddress', value: e.target.value})}
+                error={state.inputErrorMessage.username ? true : false}
+                helperText={state.inputErrorMessage.username??``}
+                value={state.loginInput.username}
+                onChange = {(e) => dispatch({ type: actionType.ONCHANGE_LOGININPUT, key: 'username', value: e.target.value})}
                 sx={{
                   backgroundColor: '#0A2478',
                   color: '#FFFFFF',
