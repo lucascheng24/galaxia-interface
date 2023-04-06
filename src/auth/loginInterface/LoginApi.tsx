@@ -22,7 +22,23 @@ export interface RegisterRequest {
 export const login_request = (loginRequest: LoginRequest) => {
     //  api of something
 
-    var apiPath = baseUrl + '/login'
+    var apiPath = baseUrl + '/auth/login'
+
+    axios.post(apiPath, {
+        loginRequest: loginRequest
+    }).then(response => {
+        console.log(response.data)
+
+    }).catch(error => {
+        console.log(error)
+    })
+}
+
+
+export const logout_request = (loginRequest: LoginRequest) => {
+    //  api of something
+
+    var apiPath = baseUrl + '/auth/logout'
 
     axios.post(apiPath, {
         loginRequest: loginRequest
@@ -39,7 +55,7 @@ export const login_request = (loginRequest: LoginRequest) => {
 export const register_request = (registerRequest: RegisterRequest) => {
     //  api of something
 
-    var apiPath = baseUrl + '/sign-up'
+    var apiPath = baseUrl + '/users/sign-up'
 
     axios.post(apiPath, {
         request: registerRequest

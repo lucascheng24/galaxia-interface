@@ -68,3 +68,18 @@
 .common-border-01 {
     border: 1px solid #FFFFFF;
 }
+
+.buttonLogOut {
+    margin-top: 1rem;
+    color: white;
+    background-color: #2899DA;
+    justify-content: center;
+    display: flex;
+    z-index: 2;
+    width: 280px;
+    height: auto;
+    padding: 10px;
+    border-width: 0;
+    border-radius: 6px;
+    font-size: 16px;
+}
