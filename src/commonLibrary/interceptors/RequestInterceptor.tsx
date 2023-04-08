@@ -9,7 +9,9 @@ export const RequestInterceptor: FC<Props> = ({ children }) => {
     
     axios.interceptors.request.use( req => {
         //  do something here
-
+        
+        //Access-Control-Allow-Origin
+        req.headers['Access-Control-Allow-Origin'] =  '*'
 
         return req;
     }, (error) => {

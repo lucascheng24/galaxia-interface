@@ -15,6 +15,7 @@ import { RequestInterceptor } from './commonLibrary/interceptors/RequestIntercep
 import { LoginRequest, logout_request } from './auth/loginInterface/LoginApi';
 import { Grid } from '@mui/material';
 import BasicOperationLayer from './basicOperationLayer/BasicOperationLayer';
+import ChatRoom from './chatRoom/chatroom';
 
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
               <Routes>
                 <Route index element={<Home />} />
                 <Route path="/LoginInterface" element={<LoginInterface />} />
+                <Route path="/ChatRoom" element={<ChatRoom />} />
                 {/* <Route path="/test" element={<Test />}></Route> */}
                 {/* <Route index element={<div className='App-Title'>這是首頁</div>}></Route> */}
                 {/* <Route path="*" element={<NotFound />}></Route> */}
