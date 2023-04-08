@@ -203,7 +203,7 @@ const LoginInterface = (props: any) => {
 
   return (
     <Container>
-      <Grid item xs={4} className="leftOverlay">
+      <Grid item xs={12} className="leftOverlay">
         {/* default UI */}
         { state.page_mode === LOGININTERFACE_PAGEMODE_TYPE.default &&
           <div>
@@ -467,7 +467,7 @@ const LoginInterface = (props: any) => {
         }
         
       </Grid>
-      <Grid item xs={8}><div style={{height: '100vh'}} onClick={() => navigate(-1)}></div></Grid>
+      <Grid item xs={0}><div style={{height: '100vh'}} onClick={() => navigate(-1)}></div></Grid>
     </Container>    
   );
 }

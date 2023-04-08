@@ -12,7 +12,7 @@
 }
 
 .logo {
-    margin-top: 320px;
+    margin-top: 8rem;
     height: 100px;
 }
 
@@ -53,40 +53,46 @@
     font-size: 16px;
 }
 
-.buttonLogin-2{
+.buttonLogin-2 {
     margin-left: 3.45rem;
 }
 
-.buttonLogin:hover, .buttonRegister:hover, .buttonLogin-2:hover, .buttonRegister-2:hover{
+.buttonLogin:hover,
+.buttonRegister:hover,
+.buttonLogin-2:hover,
+.buttonRegister-2:hover {
     cursor: pointer;
 }
 
-.buttonLogin{
+.buttonLogin {
     margin-top: 1rem;
-} 
+}
 
 .buttonRegister {
     margin-top: 4rem;
 }
 
+
 /* Login UI */
-.logo-2{
-    margin-top: 200px;
+
+.logo-2 {
+    /* margin-top: 200px; */
     height: 100px;
 }
 
-.TitleText-1, .TitleText-2{
+.TitleText-1,
+.TitleText-2 {
     color: #0A2478;
 }
 
-.TitleText-1{
+.TitleText-1 {
     font-size: 2rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
     font-weight: 500;
 }
 
-.TitleText-2{
+.TitleText-2 {
     padding-top: 1rem;
     padding-bottom: 2rem;
     font-size: 0.9rem;

@@ -83,3 +83,16 @@
     border-radius: 6px;
     font-size: 16px;
 }
+
+.full-height {
+    height: 90%;
+}
+
+.white_border {
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+}
+
+.InformationBox_text {
+    font-size: x-large;
+}

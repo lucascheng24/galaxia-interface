@@ -10,10 +10,11 @@ import Layout from './Layout';
 import Home from './homePage/Home';
 import cover_threeSolar from './picture/cover_threeSolar.png'
 import { AuthContextProvider, useAuth } from './auth/UserProfileContext';
-import { ResponseInterceptor } from './interceptors/ResponseInterceptor';
-import { RequestInterceptor } from './interceptors/RequestInterceptor';
+import { ResponseInterceptor } from './commonLibrary/interceptors/ResponseInterceptor';
+import { RequestInterceptor } from './commonLibrary/interceptors/RequestInterceptor';
 import { LoginRequest, logout_request } from './auth/loginInterface/LoginApi';
 import { Grid } from '@mui/material';
+import BasicOperationLayer from './basicOperationLayer/BasicOperationLayer';
 
 
 const App = () => {
@@ -32,26 +33,6 @@ const App = () => {
 
   const navigate = useNavigate();
   const { userProfile, setUserProfile } = useAuth();
-
-  const request_LogoutAccount = () => {
-    //  call api '/logout'
-
-    const username = userProfile?.username;
-    const password = userProfile?.token;
-
-    if (username && password) {
-
-      var requestBody: LoginRequest = {
-        username: username, 
-        password: password, 
-        rememberMe: false
-      }
-      //  send api
-      logout_request(requestBody)
-    } else {
-      console.log('logout error: miss element')
-    }
-  }
   
 
   return (
@@ -59,28 +40,20 @@ const App = () => {
       <AuthContextProvider>
         <RequestInterceptor>
           <ResponseInterceptor>
-            <Routes>
-              <Route index element={<Home />} />
-              <Route path="/LoginInterface" element={<LoginInterface />} />
-              {/* <Route path="/test" element={<Test />}></Route> */}
-              {/* <Route index element={<div className='App-Title'>這是首頁</div>}></Route> */}
-              {/* <Route path="*" element={<NotFound />}></Route> */}
-            </Routes>
+            <BasicOperationLayer>
+              <Routes>
+                <Route index element={<Home />} />
+                <Route path="/LoginInterface" element={<LoginInterface />} />
+                {/* <Route path="/test" element={<Test />}></Route> */}
+                {/* <Route index element={<div className='App-Title'>這是首頁</div>}></Route> */}
+                {/* <Route path="*" element={<NotFound />}></Route> */}
+              </Routes>
+
+            </BasicOperationLayer>
+            
           </ResponseInterceptor>
         </RequestInterceptor>
       </AuthContextProvider>
-      <Container>
-        <Grid item xs={4} className="">
-          { 
-          userProfile?.username &&
-            <div>
-              <Button className='buttonLogOut' 
-                onClick={() => request_LogoutAccount}
-              >Logout</Button>
-            </div>
-          }
-        </Grid>
-      </Container>
     </div>
   );
 }
