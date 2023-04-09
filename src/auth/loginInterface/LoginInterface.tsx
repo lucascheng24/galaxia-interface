@@ -111,7 +111,7 @@ const LoginInterface = (props: any) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
 
-  const request_LoginAccount = () => {
+  const request_LoginAccount = async () => {
     //  call api '/login'
 
     const username = state.loginInput.username?.trim();
@@ -129,9 +129,26 @@ const LoginInterface = (props: any) => {
         rememberMe: false
       }
       //  send api
-      login_request(requestBody)
+      login_request(requestBody).then(response => {
+        // console.log("login_request-res: ", response);
+        const hasAuthorization = response.headers['authorization']!! ?? false;
 
+        if (response.status === 200 && hasAuthorization) {
+          const authToken = response.headers['authorization']?? undefined
 
+          setUserProfile({
+            ...userProfile,
+            username: username,
+            token: authToken
+          });
+
+        } else {
+          console.log('http status ', response.status)
+          console.log('http response', response)
+        }
+      }).catch(error => {
+        console.log(error)
+      })
 
     } else {
       if (!username) {
@@ -141,8 +158,6 @@ const LoginInterface = (props: any) => {
         dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'password', value: 'Please enter password'})
       }
     }
-
-    
   }
 
 
@@ -166,7 +181,7 @@ const LoginInterface = (props: any) => {
         userName: username, 
         password: password, 
         role: Role.USER,
-        email: emailAddress
+        fullName: emailAddress
       }
       //  send api
       register_request(requestBody)

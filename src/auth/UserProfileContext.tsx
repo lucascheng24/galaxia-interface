@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useState, useContext } from "react";
+import { createContext, FC, ReactNode, useState, useContext, useEffect } from "react";
 import { Role } from "../commonLibrary/userClass";
 
 
@@ -25,6 +25,10 @@ const AuthContext = createContext<AuthContextType>({
 
 export const AuthContextProvider: FC<CProps> = ({ children }) => {
     const [userProfile, setUserProfile] = useState<userProfile | null>(null);
+
+    useEffect(() => {
+        console.log("UPDATE - userProfile:", userProfile)
+    }, [userProfile])
 
     return (
         <AuthContext.Provider value={{ userProfile, setUserProfile }}>

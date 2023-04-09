@@ -16,24 +16,19 @@ export interface RegisterRequest {
     userName: string,
     password: string,
     role: Role,
-    email: string
+    fullName: string
 }
 
 export const login_request = (loginRequest: LoginRequest) => {
-    //  api of something
-
-    var apiPath = baseUrl + '/auth/login'
-
-    axios.post(apiPath, {
-        loginRequest: loginRequest
-    }).then(response => {
-        console.log(response.data)
-
+    const apiPath = baseUrl + '/auth/login';
+  
+    return axios.post(apiPath, loginRequest).then(response => {  
+        return response;
     }).catch(error => {
-        console.log(error)
-    })
-}
-
+        console.log(error);
+        return error;
+    });
+};
 
 export const logout_request = (loginRequest: LoginRequest) => {
     //  api of something
@@ -57,9 +52,7 @@ export const register_request = (registerRequest: RegisterRequest) => {
 
     var apiPath = baseUrl + '/users/sign-up'
 
-    axios.post(apiPath, {
-        request: registerRequest
-    },{
+    axios.post(apiPath, registerRequest,{
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
             'token': 'xxx'

@@ -11,7 +11,10 @@ export const RequestInterceptor: FC<Props> = ({ children }) => {
         //  do something here
         
         //Access-Control-Allow-Origin
-        req.headers['Access-Control-Allow-Origin'] =  '*'
+        // req.headers['Access-Control-Allow-Origin'] = '*';
+        req.headers['Access-Control-Allow-Credentials'] = 'true';
+        // req.headers['Origin'] = 'http://localhost:3000' // add the Origin header here
+
 
         return req;
     }, (error) => {
