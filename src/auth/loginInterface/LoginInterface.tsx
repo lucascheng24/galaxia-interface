@@ -10,7 +10,8 @@ import { LOGININTERFACE_PAGEMODE_TYPE } from './LoginInterfaceType';
 import login_request, { LoginRequest, RegisterRequest, register_request } from './LoginApi';
 import { Role } from '../../commonLibrary/userClass';
 import { useAuth } from '../UserProfileContext';
-
+import jwt_decode from "jwt-decode";
+import { JwtPayload } from '../../commonLibrary/httpStandard';
 
 //  define state object
 interface stateInterface {
@@ -135,10 +136,20 @@ const LoginInterface = (props: any) => {
 
         if (response.status === 200 && hasAuthorization) {
           const authToken = response.headers['authorization']?? undefined
+          const jwtToken = JSON.stringify(authToken).replace(`Bearer `, ``)
+
+          console.log('jwtToken: ', jwtToken)
+
+          const jwt_payload : JwtPayload = jwt_decode(jwtToken) 
+
+          console.log("jwt_decode: ", jwt_payload)
+
+          // const exp = jwt_payload.exp
+
 
           setUserProfile({
             ...userProfile,
-            username: username,
+            username: jwt_payload.sub,
             token: authToken
           });
 

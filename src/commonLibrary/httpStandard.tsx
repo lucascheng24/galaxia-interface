@@ -4,6 +4,13 @@ export enum common_request {
 }
 
 
-
+export interface JwtPayload {
+    exp?: number;
+    iat?: number;
+    iss?: string;
+    jti?: string;
+    rol?: string;
+    sub?: string;
+}
 
 
