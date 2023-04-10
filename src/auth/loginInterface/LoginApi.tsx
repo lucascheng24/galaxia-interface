@@ -35,14 +35,21 @@ export const logout_request = (loginRequest: LoginRequest) => {
 
     var apiPath = baseUrl + '/auth/logout'
 
-    axios.post(apiPath, {
-        loginRequest: loginRequest
-    }).then(response => {
-        console.log(response.data)
-
+    return axios.post(apiPath, loginRequest).then(response => {  
+        return response;
     }).catch(error => {
-        console.log(error)
-    })
+        console.log(error);
+        return error;
+    });
+
+    // axios.post(apiPath, {
+    //     loginRequest: loginRequest
+    // }).then(response => {
+    //     console.log(response.data)
+
+    // }).catch(error => {
+    //     console.log(error)
+    // })
 }
 
 

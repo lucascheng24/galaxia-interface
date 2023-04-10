@@ -3,6 +3,7 @@ import { Role } from "../commonLibrary/userClass";
 import { JwtPayload } from "../commonLibrary/httpStandard";
 import Cookies from "universal-cookie";
 import jwt_decode from "jwt-decode";
+import { STORED_COOKIE_PATH } from "../commonLibrary/cookieClass";
 
 export interface userProfile {
     username?: string
@@ -33,6 +34,7 @@ export const AuthContextProvider: FC<CProps> = ({ children }) => {
     const [userProfile, setUserProfile] = useState<userProfile | null>(null);
 
     useEffect(() => {
+        //  run whenever userProfile is updated
         console.log("UPDATE - userProfile:", userProfile)
 
         if (userProfile?.username && userProfile?.hashPw) {
@@ -43,7 +45,7 @@ export const AuthContextProvider: FC<CProps> = ({ children }) => {
                 hashPw: userProfile?.hashPw
             }
 
-            cookies.set('userInfo', JSON.stringify(userInfo), 
+            cookies.set(STORED_COOKIE_PATH.User_Info, JSON.stringify(userInfo), 
                 { path: '/', secure: true, sameSite :true}
             );
         }
@@ -51,17 +53,19 @@ export const AuthContextProvider: FC<CProps> = ({ children }) => {
         if (userProfile?.token) {
             // set the cookie
 
-            cookies.set('jwtToken', userProfile?.token, 
+            cookies.set(STORED_COOKIE_PATH.JWT, userProfile?.token, 
                 { path: '/', secure: true, sameSite :true}
             );
         }
 
     }, [userProfile])
 
+
     useEffect(() => {
         //  update item from cookie if any
-        const userInfoStr = cookies.get('userInfo')
-        const jwtToken = cookies.get('jwtToken')
+        //  In general, only trun this after user refresh the page. Try to restore all global state from cookie
+        const userInfoStr = cookies.get(STORED_COOKIE_PATH.User_Info)
+        const jwtToken = cookies.get(STORED_COOKIE_PATH.JWT)
 
         console.log('get from cookie: ', userInfoStr)
         console.log('jwtToken get from cookie: ', jwtToken)
@@ -79,10 +83,7 @@ export const AuthContextProvider: FC<CProps> = ({ children }) => {
                 token: jwtToken,
                 jwtPayload: jwt_payload
             })
-
         }
-
-
     }, [])
 
     return (
