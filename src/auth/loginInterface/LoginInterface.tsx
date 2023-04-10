@@ -12,6 +12,7 @@ import { Role } from '../../commonLibrary/userClass';
 import { useAuth } from '../UserProfileContext';
 import jwt_decode from "jwt-decode";
 import { JwtPayload } from '../../commonLibrary/httpStandard';
+import { SHA256 } from 'crypto-js';
 
 //  define state object
 interface stateInterface {
@@ -126,7 +127,7 @@ const LoginInterface = (props: any) => {
 
       var requestBody: LoginRequest = {
         username: username, 
-        password: password, 
+        password: SHA256(password).toString(), 
         rememberMe: false
       }
       //  send api
@@ -137,20 +138,17 @@ const LoginInterface = (props: any) => {
         if (response.status === 200 && hasAuthorization) {
           const authToken = response.headers['authorization']?? undefined
           const jwtToken = JSON.stringify(authToken).replace(`Bearer `, ``)
-
-          console.log('jwtToken: ', jwtToken)
-
           const jwt_payload : JwtPayload = jwt_decode(jwtToken) 
-
+          
+          console.log('jwtToken: ', jwtToken)
           console.log("jwt_decode: ", jwt_payload)
-
-          // const exp = jwt_payload.exp
-
 
           setUserProfile({
             ...userProfile,
             username: jwt_payload.sub,
-            token: authToken
+            hashPw: requestBody.password,
+            token: jwtToken,
+            jwtPayload: jwt_payload
           });
 
         } else {
@@ -190,7 +188,7 @@ const LoginInterface = (props: any) => {
 
       var requestBody: RegisterRequest = {
         userName: username, 
-        password: password, 
+        password: SHA256(password).toString(), 
         role: Role.USER,
         fullName: emailAddress
       }
