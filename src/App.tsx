@@ -43,12 +43,13 @@ const App = () => {
         rememberMe: false,
       };
       //  send api
-      logout_request(requestBody).then((response) => {
+      logout_request().then((response) => {
         if (response.status === 200) {
           //  clear all the things
-          setUserProfile({});
           cookies.remove(STORED_COOKIE_PATH.JWT);
           cookies.remove(STORED_COOKIE_PATH.User_Info);
+          setUserProfile({});
+          
         }
       });
     } else {

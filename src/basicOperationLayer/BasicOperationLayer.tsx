@@ -51,28 +51,40 @@ export const BasicOperationLayer: FC<Props> = ({ children }) => {
   const request_LogoutAccount = () => {
     //  call api '/logout'
 
+    console.log('trigger logout')
     const username = userProfile?.username;
     const password = userProfile?.token;
 
     if (username && password) {
+      console.log('trigger logout - hv uName, pw')
       var requestBody: LoginRequest = {
         username: username,
         password: password,
         rememberMe: false,
       };
       //  send api
-      logout_request(requestBody).then((response) => {
+      logout_request().then((response) => {
         if (response.status === 200) {
           //  clear all the things
-          setUserProfile({});
           cookies.remove(STORED_COOKIE_PATH.JWT);
           cookies.remove(STORED_COOKIE_PATH.User_Info);
+
+          setTimeout(() => {
+            setUserProfile({});
+          }, 1000)
+          
         }
+      }).catch(error => {
+        console.log('BasicOperationLayer > logout error', error)
       });
     } else {
       console.log("logout error: miss element");
     }
   };
+
+  const removeJWT = () => {
+    cookies.remove(STORED_COOKIE_PATH.JWT);
+  }
 
   return (
     <>
@@ -90,17 +102,20 @@ export const BasicOperationLayer: FC<Props> = ({ children }) => {
                   />
                 </Grid>
                 <Grid item xs={12} className="">
-                  <Link to="/">
                     <Button
                       className="buttonLogOut"
-                      onClick={() => request_LogoutAccount}
+                      onClick={() => request_LogoutAccount()}
                     > Logout</Button>
-                  </Link>
+
+                    {/* <Button
+                      className="buttonLogOut"
+                      onClick={() => removeJWT()}
+                    > remove jwt</Button> */}
                 </Grid>
               </div>
             )}
           </Grid>
-          <div className="full-height" onClick={() => navigate(-1)} />
+          <div className="full-height" onClick={() => navigate('/')} />
         </Grid>
       </Grid>
     </>

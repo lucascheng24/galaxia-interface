@@ -74,20 +74,23 @@ export const RequestInterceptor: FC<Props> = ({ children }) => {
 
         const expTimestamp = userProfile?.jwtPayload?.exp;  // Unix timestamp in seconds
 
-        if (expTimestamp) {
-            if (expTimestamp < Date.now()) {
-                // token has expired
-                //  refresh token
-                refreshToken()
-            } else {
-                // token is still valid
+        /** will cause infinte loop */
+        // if (expTimestamp) {
+        //     if (expTimestamp < Date.now()) {
+        //         // token has expired
+        //         //  refresh token
+        //         console.log('refresh Token')
+        //         refreshToken()
+        //     } else {
+        //         // token is still valid
 
-            }
-        }
+        //     }
+        // }
         
 
         if (userProfile?.token) {
-            req.headers['Authorization'] = `Bearer ` + userProfile?.token;
+            // req.headers['Authorization'] = "Bearer " + JSON.stringify(userProfile?.token);
+            req.headers['Authorization'] = "Bearer " + userProfile?.token.replace(/^"|"$/g, '');
         }
 
 

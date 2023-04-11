@@ -133,9 +133,9 @@ const LoginInterface = (props: any) => {
       //  send api
       login_request(requestBody).then(response => {
         // console.log("login_request-res: ", response);
-        const hasAuthorization = response.headers['authorization']!! ?? false;
+        // const hasAuthorization = response.headers['authorization']!! ?? false;
 
-        if (response.status === 200 && hasAuthorization) {
+        if (response.status === 200 && (response.headers['authorization']?? false)) {
           const authToken = response.headers['authorization']?? undefined
           const jwtToken = JSON.stringify(authToken).replace(`Bearer `, ``)
           const jwt_payload : JwtPayload = jwt_decode(jwtToken) 
@@ -151,6 +151,12 @@ const LoginInterface = (props: any) => {
             jwtPayload: jwt_payload
           });
 
+          navigate('/')
+
+
+        } else if (response.response.status === 404 && response.response.data.message === 'User Not Found') {
+          console.log('User Not Found')
+          dispatch({ type: actionType.UPDATE_LOGININPUT_ERROR_MESSAGE, key: 'username', value: 'User Not Found'})
         } else {
           console.log('http status ', response.status)
           console.log('http response', response)
@@ -193,7 +199,15 @@ const LoginInterface = (props: any) => {
         fullName: emailAddress
       }
       //  send api
-      register_request(requestBody)
+      register_request(requestBody).then(response => {
+
+        if (response.status === 200 ) {
+          request_LoginAccount()
+        }
+        
+      }).catch(error => {
+        console.log(error)
+      })
 
     } else {
       if (!username) {
@@ -225,7 +239,7 @@ const LoginInterface = (props: any) => {
   } 
 
 
-  return (
+  return ( 
     <Container>
       <Grid item xs={12} className="leftOverlay">
         {/* default UI */}

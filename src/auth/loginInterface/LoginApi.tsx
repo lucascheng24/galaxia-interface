@@ -30,26 +30,18 @@ export const login_request = (loginRequest: LoginRequest) => {
     });
 };
 
-export const logout_request = (loginRequest: LoginRequest) => {
+export const logout_request = () => {
     //  api of something
 
     var apiPath = baseUrl + '/auth/logout'
 
-    return axios.post(apiPath, loginRequest).then(response => {  
+    return axios.post(apiPath).then(response => {
+        console.log('logout response', response)
         return response;
     }).catch(error => {
-        console.log(error);
+        console.log('logout error', error)
         return error;
     });
-
-    // axios.post(apiPath, {
-    //     loginRequest: loginRequest
-    // }).then(response => {
-    //     console.log(response.data)
-
-    // }).catch(error => {
-    //     console.log(error)
-    // })
 }
 
 
@@ -59,16 +51,17 @@ export const register_request = (registerRequest: RegisterRequest) => {
 
     var apiPath = baseUrl + '/users/sign-up'
 
-    axios.post(apiPath, registerRequest,{
+    return axios.post(apiPath, registerRequest,{
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
             'token': 'xxx'
         }
     }).then(response => {
         console.log(response.data)
-
+        return response
     }).catch(error => {
         console.log(error)
+        return error;
     })
 }
 

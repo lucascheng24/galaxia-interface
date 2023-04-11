@@ -58,6 +58,11 @@ export const AuthContextProvider: FC<CProps> = ({ children }) => {
             );
         }
 
+        if (userProfile?.token === undefined) {
+            cookies.remove(STORED_COOKIE_PATH.JWT);
+            cookies.remove(STORED_COOKIE_PATH.User_Info);
+        }
+
     }, [userProfile])
 
 
