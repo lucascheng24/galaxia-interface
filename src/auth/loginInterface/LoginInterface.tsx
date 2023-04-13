@@ -337,7 +337,7 @@ const LoginInterface = (props: any) => {
               <div>email address: {state.loginInput.emailAddress} </div>
               <div>password: {state.loginInput.password} </div>
             </Grid>
-            <Grid font-black>
+            <Grid className='font-black'>
               <Button className='buttonLogin-2'
                 onClick={() => request_LoginAccount()}
               >Login</Button>
@@ -492,7 +492,7 @@ const LoginInterface = (props: any) => {
               <div>password: {state.loginInput.password} </div>
               <div>re-password: {state.loginInput.rePassword} </div>
             </Grid>
-            <Grid font-black>
+            <Grid className='font-black'>
               <Button className='buttonLogin-2'
                 onClick={() => request_RegisterAccount()}
               >Register</Button>
