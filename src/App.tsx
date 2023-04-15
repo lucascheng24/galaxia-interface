@@ -12,6 +12,7 @@ import ChatRoom from "./chatRoom/chatroom";
 import Cookies from "universal-cookie";
 import { LoginRequest, logout_request } from "./auth/loginInterface/LoginApi";
 import { STORED_COOKIE_PATH } from "./commonLibrary/cookieClass";
+import ChatRoomParentComponent from "./chatRoom/ChatRoomParent";
 
 const App = () => {
   const myStyle_backgroundImage = {
@@ -75,7 +76,9 @@ const App = () => {
               <Routes>
                 <Route index element={<Home />} />
                 <Route path="/LoginInterface" element={<LoginInterface />} />
-                <Route path="/ChatRoom" element={<ChatRoom />} />
+                <Route path="/ChatRoom" element={<ChatRoomParentComponent />} />
+                {/* ChatRoomParentComponent */}
+                {/* <Route path="/ChatRoom" element={<ChatRoom />} /> */}
                 {/* <Route path="/test" element={<Test />}></Route> */}
                 {/* <Route index element={<div className='App-Title'>這是首頁</div>}></Route> */}
                 {/* <Route path="*" element={<NotFound />}></Route> */}
