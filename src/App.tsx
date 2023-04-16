@@ -8,11 +8,9 @@ import { AuthContextProvider, useAuth } from "./auth/UserProfileContext";
 import { ResponseInterceptor } from "./commonLibrary/interceptors/ResponseInterceptor";
 import { RequestInterceptor } from "./commonLibrary/interceptors/RequestInterceptor";
 import BasicOperationLayer from "./basicOperationLayer/BasicOperationLayer";
-import ChatRoom from "./chatRoom/chatroom";
 import Cookies from "universal-cookie";
 import { LoginRequest, logout_request } from "./auth/loginInterface/LoginApi";
 import { STORED_COOKIE_PATH } from "./commonLibrary/cookieClass";
-import ChatRoomParentComponent from "./chatRoom/ChatRoomParent";
 
 const App = () => {
   const myStyle_backgroundImage = {
@@ -76,7 +74,7 @@ const App = () => {
               <Routes>
                 <Route index element={<Home />} />
                 <Route path="/LoginInterface" element={<LoginInterface />} />
-                <Route path="/ChatRoom" element={<ChatRoomParentComponent />} />
+                {/* <Route path="/ChatRoom" element={<ChatRoomParentComponent />} /> */}
                 {/* ChatRoomParentComponent */}
                 {/* <Route path="/ChatRoom" element={<ChatRoom />} /> */}
                 {/* <Route path="/test" element={<Test />}></Route> */}

@@ -2,8 +2,6 @@ import { Card, Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo3.png";
 import { useAuth } from "../auth/UserProfileContext";
-import ChatRoom from "../chatRoom/chatroom";
-import ChatRoomParentComponent from "../chatRoom/ChatRoomParent";
 
 const Home = () => {
 
@@ -27,7 +25,6 @@ const Home = () => {
             userProfile?.username && 
             <div>
               <Card.Text>Success Login</Card.Text>
-              <ChatRoomParentComponent/>
             </div>
           }
           
