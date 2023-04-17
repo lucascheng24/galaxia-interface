@@ -196,7 +196,7 @@ const LoginInterface = (props: any) => {
         userName: username, 
         password: SHA256(password).toString(), 
         role: Role.USER,
-        fullName: emailAddress
+        email: emailAddress
       }
       //  send api
       register_request(requestBody).then(response => {

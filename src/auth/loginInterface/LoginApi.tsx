@@ -16,7 +16,7 @@ export interface RegisterRequest {
     userName: string,
     password: string,
     role: Role,
-    fullName: string
+    email: string
 }
 
 export const login_request = (loginRequest: LoginRequest) => {
