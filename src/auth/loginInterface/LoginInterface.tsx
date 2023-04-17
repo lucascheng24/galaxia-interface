@@ -13,6 +13,7 @@ import { useAuth } from '../UserProfileContext';
 import jwt_decode from "jwt-decode";
 import { JwtPayload } from '../../commonLibrary/httpStandard';
 import { SHA256 } from 'crypto-js';
+import { GenRSAKeypair, RsaEncrypt } from '../../commonLibrary/HashFunctions';
 
 //  define state object
 interface stateInterface {
@@ -192,11 +193,14 @@ const LoginInterface = (props: any) => {
 
     if ((username && password && emailAddress) && (password === rePassword)) {
 
+      const keyPair = GenRSAKeypair();
+
       var requestBody: RegisterRequest = {
         userName: username, 
-        password: SHA256(password).toString(), 
+        password: RsaEncrypt(password, keyPair.publicKey), 
         role: Role.USER,
-        email: emailAddress
+        email: emailAddress,
+        userPublicKey: keyPair.publicKey
       }
       //  send api
       register_request(requestBody).then(response => {
